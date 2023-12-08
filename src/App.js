@@ -8,8 +8,8 @@ const App = () => {
   const savedActivities = JSON.parse(localStorage.getItem("activities")) || [];
   const [activities, setActivities] = useState(savedActivities);
   const [weather, setWeather] = useState(null);
-  const isGoodWeather = true; // Simulated value, replace it with the actual weather condition check
-  const isBadWeather = !isGoodWeather; // Invert the value for bad weather
+  const [isGoodWeather, setIsGoodWeather] = useState(true);
+  const [temperature, setTemperatur] = useState(0);
 
   const handleAddActivity = (newActivity) => {
     setActivities((prevActivities) => [...prevActivities, newActivity]);
@@ -29,6 +29,9 @@ const App = () => {
         );
         const data = await response.json();
         setWeather(data);
+        // Set the weather condition based on the fetched data
+        setIsGoodWeather(data.isGoodWeather);
+        setTemperatur(data.temperature);
       } catch (error) {
         console.error("Error fetching weather:", error);
       }
@@ -45,14 +48,8 @@ const App = () => {
     localStorage.setItem("activities", JSON.stringify(activities));
   }, [activities]);
 
-  // Filter activities based on isGoodWeather and isBadWeather
-  const goodWeatherActivities = activities.filter(
-    (activity) => activity.isForGoodWeather === isGoodWeather
-  );
-
-  const badWeatherActivities = activities.filter(
-    (activity) => activity.isForGoodWeather === isBadWeather
-  );
+  const goodWeather = isGoodWeather === true && temperature >= 20;
+  const badWeather = !goodWeather;
 
   return (
     <div>
@@ -64,16 +61,20 @@ const App = () => {
         </div>
       )}
       <Form onAddActivity={handleAddActivity} />
-      <List
-        activities={goodWeatherActivities}
-        onDeleteActivity={handleDeleteActivity}
-        isGoodWeather={isGoodWeather}
-      />
-      <List
-        activities={badWeatherActivities}
-        onDeleteActivity={handleDeleteActivity}
-        isGoodWeather={isBadWeather}
-      />
+      {goodWeather && (
+        <List
+          activities={activities}
+          onDeleteActivity={handleDeleteActivity}
+          isGoodWeather={goodWeather}
+        />
+      )}
+      {badWeather && (
+        <List
+          activities={activities}
+          onDeleteActivity={handleDeleteActivity}
+          isGoodWeather={false}
+        />
+      )}
     </div>
   );
 };
