@@ -13,13 +13,16 @@ const List = ({ activities, onDeleteActivity, isGoodWeather }) => {
       <h2>
         {isGoodWeather ? "Good Weather Activities" : "Bad Weather Activities"}
       </h2>
-      <ul>
+      <ul className="list-container">
         {/* Map through filtered activities and display them */}
         {filteredActivities.map((activity) => (
-          <li key={activity.id}>
+          <li className="list-item" key={activity.id}>
             {activity.name}
-            <button onClick={() => onDeleteActivity(activity.id)}>
-              Delete
+            <button
+              className="list-button"
+              onClick={() => onDeleteActivity(activity.id)}
+            >
+              X
             </button>
           </li>
         ))}

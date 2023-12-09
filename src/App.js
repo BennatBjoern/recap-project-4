@@ -68,14 +68,17 @@ const App = () => {
 
   return (
     <div>
-      <h1>Weather App</h1>
-      {/* Display weather information if available */}
-      {weather && (
-        <div className="weather-container">
-          <span>{weather.condition}</span>
-          <span> {weather.temperature}°C</span>
-        </div>
-      )}
+      <div className="flex-container">
+        <h1>Weather App</h1>
+        {/* Display weather information if available */}
+        {weather && (
+          <div className="weather-container">
+            <span>{weather.condition}</span>
+            <span> {weather.temperature}°C</span>
+          </div>
+        )}
+      </div>
+
       {/* Form to add new activities */}
       <Form onAddActivity={handleAddActivity} />
       {/* Display activities based on good weather */}

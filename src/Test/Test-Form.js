@@ -9,6 +9,7 @@ const Form = ({ onAddActivity }) => {
   const [activity, setActivity] = useState({
     name: "",
     isForGoodWeather: false,
+    isForBadWeather: false,
   });
 
   const inputRef = useRef(null);
@@ -16,6 +17,11 @@ const Form = ({ onAddActivity }) => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Check if at least one weather checkbox is selected
+    if (!activity.isForGoodWeather && !activity.isForBadWeather) {
+      return;
+    }
 
     // Check if the activity name is not empty
     if (activity.name.trim() === "") {
@@ -27,6 +33,7 @@ const Form = ({ onAddActivity }) => {
       id: uuidv4(),
       name: activity.name,
       isForGoodWeather: activity.isForGoodWeather,
+      isForBadWeather: activity.isForBadWeather,
     };
 
     // Call the parent component's function to add the new activity
@@ -36,6 +43,7 @@ const Form = ({ onAddActivity }) => {
     setActivity({
       name: "",
       isForGoodWeather: false,
+      isForBadWeather: false,
     });
 
     inputRef.current.focus();
@@ -48,7 +56,10 @@ const Form = ({ onAddActivity }) => {
         <button
           className="submit-button"
           type="submit"
-          disabled={!activity.name.trim()}
+          disabled={
+            !activity.name.trim() ||
+            (!activity.isForGoodWeather && !activity.isForBadWeather)
+          }
         >
           +
         </button>
@@ -62,17 +73,31 @@ const Form = ({ onAddActivity }) => {
         />
       </div>
 
-      {/* Checkbox for good weather */}
-      <label>
-        Good Weather:
-        <input
-          type="checkbox"
-          checked={activity.isForGoodWeather}
-          onChange={(e) =>
-            setActivity({ ...activity, isForGoodWeather: e.target.checked })
-          }
-        />
-      </label>
+      <div className="checkbox-container">
+        {/* Checkbox for good weather */}
+        <label>
+          Good Weather:
+          <input
+            type="checkbox"
+            checked={activity.isForGoodWeather}
+            onChange={(e) =>
+              setActivity({ ...activity, isForGoodWeather: e.target.checked })
+            }
+          />
+        </label>
+
+        {/* Checkbox for bad weather */}
+        <label>
+          Bad Weather:
+          <input
+            type="checkbox"
+            checked={activity.isForBadWeather}
+            onChange={(e) =>
+              setActivity({ ...activity, isForBadWeather: e.target.checked })
+            }
+          />
+        </label>
+      </div>
     </form>
   );
 };
