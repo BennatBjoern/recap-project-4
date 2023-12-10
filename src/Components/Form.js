@@ -59,6 +59,7 @@ const Form = ({ onAddActivity }) => {
           value={activity.name}
           onChange={(e) => setActivity({ ...activity, name: e.target.value })}
           ref={inputRef}
+          maxLength={50}
         />
       </div>
 
