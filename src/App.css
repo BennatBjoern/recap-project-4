@@ -1,3 +1,17 @@
+:root {
+  /* Color */
+  --primary-color: #2c2d32;
+  --primary-color-shade: #23283d;
+  --accent-color: #4d5066;
+  --white: #fff;
+  --gradient-color1: rgba(46, 21, 157, 0.2);
+  --gradient-color2: rgba(120, 29, 119, 0.2);
+  --checkbox-color: #4caf50;
+
+  /* Border */
+  --border-radius: 5px;
+}
+
 .weather-container {
   gap: 2rem;
   font-size: 2.4rem;
@@ -21,11 +35,11 @@ body {
   justify-content: center;
   background: linear-gradient(
       90deg,
-      rgba(46, 21, 157, 0.2),
-      rgba(120, 29, 119, 0.2)
+      var(--gradient-color1),
+      var(--gradient-color2)
     ),
     #161721;
-  color: #fff;
+  color: var(--white);
   min-height: 100vh;
   margin: 0;
 }
@@ -59,9 +73,13 @@ form div {
 
 .container {
   display: flex;
-  background-color: #2c2d32;
-  border-radius: 5px;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
   overflow: hidden;
+}
+
+label {
+  width: fit-content;
 }
 
 .submit-button {
@@ -70,7 +88,7 @@ form div {
   align-items: center;
   background-color: transparent;
   border: none;
-  color: #fff;
+  color: var(--white);
   font-size: 1.6rem;
   margin-left: 0.5rem;
 }
@@ -80,40 +98,56 @@ form div {
 }
 
 form input {
-  background-color: #2c2d32;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--white);
   padding: 0.5rem 1rem;
   border: none;
   flex: 1;
+  font-size: 1.2rem;
 }
 
 input[type="checkbox"] {
-  margin: 0;
+  /* margin: 0;
   width: 1rem;
-  height: 1rem;
+  height: 1rem; */
+  display: none;
+}
+
+input[type="checkbox"]:checked + .checkbox {
+  background-color: var(--checkbox-color);
+  color: var(--white);
+}
+
+.checkbox {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--accent-color);
+  cursor: pointer;
+  border-radius: var(--border-radius);
 }
 
 /* List */
 
 .list-container {
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   overflow: hidden;
 }
 .list-item {
-  background-color: #23283d;
+  background-color: var(--primary-color-shade);
   position: relative;
   padding: 0.5rem 1rem;
   list-style: none;
-  color: #fff;
+  color: var(--white);
   margin-bottom: 1px;
+  font-size: 1.2rem;
 }
 
 .list-item:not(:first-child) {
-  border-top: 1px solid #4d5066;
+  border-top: 1px solid var(--accent-color);
 }
 
 .list-button {
-  border: 1px solid #4d5066;
+  border: 1px solid var(--accent-color);
   width: 20px;
   height: 20px;
   border-radius: 50%;

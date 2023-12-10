@@ -64,7 +64,6 @@ const Form = ({ onAddActivity }) => {
 
       {/* Checkbox for good weather */}
       <label>
-        Good Weather:
         <input
           type="checkbox"
           checked={activity.isForGoodWeather}
@@ -72,6 +71,7 @@ const Form = ({ onAddActivity }) => {
             setActivity({ ...activity, isForGoodWeather: e.target.checked })
           }
         />
+        <span className="checkbox">Good Weather</span>
       </label>
     </form>
   );
