@@ -2,8 +2,8 @@
 // The main component that orchestrates the Weather App.
 
 import React, { useState, useEffect } from "react";
-import Form from "./Components/Form";
-import List from "./Components/List";
+import Form from "./Components/Form/Form";
+import List from "./Components/List/List";
 import "./App.css";
 
 const App = () => {

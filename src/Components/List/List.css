@@ -1,0 +1,41 @@
+/* List */
+
+.list-container {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+.list-item {
+  background-color: var(--primary-color-shade);
+  position: relative;
+  padding: 0.5rem 1rem;
+  list-style: none;
+  color: var(--white);
+  margin-bottom: 1px;
+  font-size: 1.2rem;
+}
+
+.list-item:not(:first-child) {
+  border-top: 1px solid var(--accent-color);
+}
+
+.list-button {
+  border: 1px solid var(--accent-color);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: transparent;
+  position: absolute;
+  right: 1rem;
+  font-weight: 700;
+  color: inherit;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.list-item:hover .list-button {
+  opacity: 1;
+}
+
+.list-button:hover {
+  cursor: pointer;
+}
