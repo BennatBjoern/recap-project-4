@@ -1,7 +1,4 @@
-// Form.js
-// This component handles the form for adding new activities.
-
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const Form = ({ onAddActivity }) => {
@@ -10,8 +7,6 @@ const Form = ({ onAddActivity }) => {
     name: "",
     isForGoodWeather: false,
   });
-
-  const inputRef = useRef(null);
 
   // Handle form submission
   const handleSubmit = (e) => {
@@ -32,13 +27,11 @@ const Form = ({ onAddActivity }) => {
     // Call the parent component's function to add the new activity
     onAddActivity(newActivity);
 
-    // Clear the input fields and focus on the name input
+    // Clear the input fields
     setActivity({
       name: "",
       isForGoodWeather: false,
     });
-
-    inputRef.current.focus();
   };
 
   return (
@@ -58,7 +51,6 @@ const Form = ({ onAddActivity }) => {
           type="text"
           value={activity.name}
           onChange={(e) => setActivity({ ...activity, name: e.target.value })}
-          ref={inputRef}
           maxLength={50}
         />
       </div>
@@ -69,7 +61,10 @@ const Form = ({ onAddActivity }) => {
           type="checkbox"
           checked={activity.isForGoodWeather}
           onChange={(e) =>
-            setActivity({ ...activity, isForGoodWeather: e.target.checked })
+            setActivity({
+              ...activity,
+              isForGoodWeather: e.target.checked,
+            })
           }
         />
         <span className="checkbox">Good Weather</span>
